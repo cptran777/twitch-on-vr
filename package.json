@@ -4,7 +4,12 @@
   "description": "Experimental application to watch Twitch on mobile web VR",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server/index.js",
+    "build": "npm run build:dev",
+    "build:dev": "webpack --watch -d",
+    "build:prod": "webpack",
+    "postinstall": "npm run build:prod",
+    "test": "node server/index.js & mocha --bail --reporter nyan test/server-test/ServerSpec.js; pkill -n node; live-server --open=./test/client-test/SpecRunner.html --port=8081"
   },
   "repository": {
     "type": "git",
