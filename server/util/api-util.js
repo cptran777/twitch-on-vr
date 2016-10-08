@@ -8,7 +8,8 @@ const TwitchSearch = (req, res) => {
   	uri: 'https://api.twitch.tv/kraken/search/streams',
   	qs: {
   	  client_id: process.env.TWITCH_CLIENTID,
-  	  query: 'smite'
+  	  query: 'smite',
+  	  limit: 5
   	}
   }
 
