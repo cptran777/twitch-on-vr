@@ -18,6 +18,8 @@ Install dependencies with `npm install` and then start server with `npm start`.
 ## Architecture
 This application is frontend intensive. The client communicates with the backend to serve up the page's assets. The backend is written with Node. 
 
+Client communicates with the backend through AJAX request and triggers the Node server to send specified request to the Twitch API. Upon response, the backend will reduce data to just the needed items before sending back to the client. This will also help protect the secret key needed for the Twitch API. 
+
 ## Issues and Chalenges
 
 ### Limitation of VR
