@@ -33,6 +33,7 @@ const TwitchSearch = (req, res) => {
 *						// Side note: .preview { small: 'imglink', medium: 'imglink' } gets thumbnails
 *	.name				// Gets the string of the channel name
 *						// Side note: .url will get a link to that channel
+*						// Another side note: .game will get a string name for the game being streamed
 */
 
 const TwitchFeatured = (req, res) => {
@@ -52,7 +53,33 @@ const TwitchFeatured = (req, res) => {
   	  // Parse body:
   	  let parsedBody = JSON.parse(body);
   	  console.log('response: ', parsedBody.featured[2].stream.channel.name);
-  	  // console.log('twitch api success: ', body);
+
+  	  // Send back only the necessary information to the client
+  	  let data = {
+  	  	featured: []
+  	  };
+
+  	  if (!parsedBody.featured || parsedBody.featured.length < 1) {
+  	  	res.send(data);
+  	  	return;
+  	  }
+
+  	  for (let x = 0; x < parsedBody.featured.length; x++) {
+  	  	let streamObject = {};
+  	  	let streamData = parsedBody.featured[x].stream;
+  	  	streamObject.channel = streamData.channel.name;
+  	  	streamObject.image = {
+  	  	  small: streamData.preview.small,
+  	  	  medium: streamData.preview.medium,
+  	  	  large: streamData.preview.large
+  	  	};
+  	  	streamObject.link = streamData.channel.url;
+
+  	  	console.log(streamObject);
+  	  	data.featured.push(streamObject);
+  	  }
+
+  	  res.send(data);
   	}
   });
 

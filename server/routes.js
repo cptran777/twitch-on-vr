@@ -16,4 +16,8 @@ module.exports = (app) => {
   app.get('/twitch/search', (req, res) => {
     apiUtil.TwitchSearch(req, res);
   });
+
+  app.get('/twitch/featured', (req, res) => {
+    apiUtil.TwitchFeatured(req, res);
+  });
 }

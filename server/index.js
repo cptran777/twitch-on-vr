@@ -14,7 +14,7 @@ let router = require('./routes');
 
 let api = require('./util/api-util');
 
-api.TwitchFeatured();
+// api.TwitchFeatured();
 
 /******************* INIT MIDDLEWARE ***********************/
 
