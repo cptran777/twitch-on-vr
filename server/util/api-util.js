@@ -25,7 +25,7 @@ const TwitchSearch = (req, res) => {
 };
 
 /*
-* To get channel from Twitch response:
+* To get channel from Twitch featured response:
 * parsedBody.featured 	// Gets an array of featured stream objects
 * 	[idx] 				// Chooses one of those stream objects
 *	.stream 			// Gets the object with stream information
