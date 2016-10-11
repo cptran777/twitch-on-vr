@@ -13,8 +13,6 @@ const TwitchSearch = (req, res) => {
   	}
   }
 
-  console.log('test client id:', process.env.TWITCH_CLIENTID);
-
   request(options, (err, apiRes, body) => {
   	if (err) {
   	  res.send(err);
@@ -26,6 +24,41 @@ const TwitchSearch = (req, res) => {
 
 };
 
+/*
+* To get channel from Twitch response:
+* parsedBody.featured 	// Gets an array of featured stream objects
+* 	[idx] 				// Chooses one of those stream objects
+*	.stream 			// Gets the object with stream information
+*	.channel			// Gets the object with information on the channel
+*						// Side note: .preview { small: 'imglink', medium: 'imglink' } gets thumbnails
+*	.name				// Gets the string of the channel name
+*						// Side note: .url will get a link to that channel
+*/
+
+const TwitchFeatured = (req, res) => {
+
+  let options = {
+  	uri: 'https://api.twitch.tv/kraken/streams/featured',
+  	qs: { 
+  	  limit: '5', 
+  	  client_id: process.env.TWITCH_CLIENTID
+  	}
+  }
+
+  request(options, (err, apiRes, body) => {
+  	if (err) {
+  	  console.log('error: ', err);
+  	} else {
+  	  // Parse body:
+  	  let parsedBody = JSON.parse(body);
+  	  console.log('response: ', parsedBody.featured[2].stream.channel.name);
+  	  // console.log('twitch api success: ', body);
+  	}
+  });
+
+};
+
 module.exports = {
-  TwitchSearch
+  TwitchSearch,
+  TwitchFeatured
 }

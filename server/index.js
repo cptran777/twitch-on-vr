@@ -12,6 +12,10 @@ let app = express();
 
 let router = require('./routes');
 
+let api = require('./util/api-util');
+
+api.TwitchFeatured();
+
 /******************* INIT MIDDLEWARE ***********************/
 
 app.use(express.static(__dirname + '/../client/public'));
